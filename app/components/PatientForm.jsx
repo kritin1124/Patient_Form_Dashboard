@@ -2,8 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import FormField from './FormField';
 import { getSocket, emitFormSubmit, emitPatientStatus } from '../api/socket/socket';
 import { v4 as uuidv4 } from 'uuid';
+import { useRouter } from 'next/navigation';
 
 export default function PatientForm() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     id: '',
     firstName: '',
@@ -199,6 +201,15 @@ export default function PatientForm() {
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-slate-50 rounded-lg shadow-md border border-slate-200">
+      <button
+        onClick={() => router.push("/")}
+        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-300 shadow-md flex items-center"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back
+      </button>
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-center text-indigo-800 mb-2">Patient Information Form</h1>
         <div className="h-1 w-24 bg-indigo-600 mx-auto rounded"></div>

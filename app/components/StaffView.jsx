@@ -1,11 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { getSocket } from "../api/socket/socket";
+import { useRouter } from "next/navigation";
 
 export default function StaffView({ activeForms, submittedForms }) {
     const activeFormsObj = activeForms || {};
     const submittedFormsObj = submittedForms || {};
 
+    const router = useRouter(); 
     const [activeStatus, setActiveStatus] = useState("Actively Filling");
     const [isLoading, setIsLoading] = useState(true);
 
@@ -49,6 +51,15 @@ export default function StaffView({ activeForms, submittedForms }) {
 
     return (
         <div className="min-h-screen bg-gray-50 py-6 px-3 sm:px-6">
+            <button
+                onClick={() => router.push("/")}
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-300 shadow-md flex items-center"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back
+            </button>           
             <div className="w-full max-w-7xl mx-auto p-0 sm:p-2 md:p-4 lg:p-6">
                 <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-6">
                     <div className="bg-gradient-to-r from-blue-800 to-blue-600 py-5 sm:py-6 px-4 sm:px-6">
