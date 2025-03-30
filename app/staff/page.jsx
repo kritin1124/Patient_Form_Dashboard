@@ -8,18 +8,18 @@ export default function Staff() {
         activeForms: {},
         submittedForms: {}
     });
-    const socket = useRef(null);  
+    const socket = useRef(null);
 
     useEffect(() => {
         socket.current = io();
 
         socket.current.on("connect", () => {
-            console.log("Connected to WebSocket:", socket.current.id); 
+            console.log("Connected to WebSocket:", socket.current.id);
         });
 
         socket.current.on("updateForms", (data) => {
             console.log("Received form data:", data);
-            setFormData(data); 
+            setFormData(data);
         });
 
         socket.current.on("disconnect", () => {
@@ -30,13 +30,14 @@ export default function Staff() {
             socket.current.disconnect();
             console.log("Socket disconnected");
         };
-    }, []); 
+    }, []);
 
     return (
         <div>
-            <StaffView 
-                activeForms={formData.activeForms || {}} 
-                submittedForms={formData.submittedForms || {}} 
+            
+            <StaffView
+                activeForms={formData.activeForms || {}}
+                submittedForms={formData.submittedForms || {}}
             />
         </div>
     );

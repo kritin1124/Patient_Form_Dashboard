@@ -133,5 +133,5 @@ patient-form-system/
 - Backend: Node.js พร้อมเซิร์ฟเวอร์ที่กำหนดเอง
 - การสื่อสารแบบเรียลไทม์: Socket.io
 - Styling: Tailwind CSS
-- Deployment: Vercel
+- Deployment: Heroku
 
