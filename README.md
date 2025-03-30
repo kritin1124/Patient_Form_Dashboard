@@ -1,37 +1,137 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Patient Form System
 
-## Getting Started
+## Overview
+ระบบแบบฟอร์มผู้ป่วยแบบเรียลไทม์ที่ช่วยให้ผู้ป่วยสามารถกรอกข้อมูลได้ ในขณะที่เจ้าหน้าที่สามารถติดตามและจัดการการส่งข้อมูลแบบเรียลไทม์
 
-First, run the development server:
-
+## Installation
 ```bash
+# Clone the repository
+git clone https://github.com/yourusername/patient-form-system.git
+
+# Navigate to the project directory
+cd patient-form-system
+
+# Install dependencies
+npm install
+
+# Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
+- การส่งแบบฟอร์มของผู้ป่วย
+- การอัปเดตแบบเรียลไทม์สำหรับการดูของเจ้าหน้าที่
+- การตรวจสอบความถูกต้องของแบบฟอร์มและการจัดการข้อผิดพลาด
+- การออกแบบที่ตอบสนองสำหรับทุกอุปกรณ์
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Development Documentation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Project Structure
+```
+patient-form-system/
+├── README.md                  # เอกสารโปรเจค
+├── app/                       # โฟลเดอร์แอปพลิเคชัน Next.js
+│   ├── api/                   
+│   │   └── socket/            # 
+│   │       └── socket.js      # การใช้งาน Socket.io
+│   ├── components/            # React components
+│   │   ├── FormField.jsx      # คอมโพเนนต์ฟิลด์แบบฟอร์มที่นำกลับมาใช้ใหม่ได้
+│   │   ├── PatientForm.jsx    # คอมโพเนนต์แบบฟอร์มผู้ป่วย
+│   │   └── StaffView.jsx      # มุมมองเจ้าหน้าที่สำหรับติดตามการส่งข้อมูล
+│   ├── favicon.ico           
+│   ├── globals.css           
+│   ├── layout.js              # คอมโพเนนต์เลย์เอาต์หลัก
+│   ├── page.jsx               # คอมโพเนนต์หน้าแรก
+│   ├── patient/              
+│   │   └── page.jsx           # หน้าแบบฟอร์มผู้ป่วย
+│   └── staff/              
+│       └── page.jsx           # หน้าแดชบอร์ดเจ้าหน้าที่
+├── jsconfig.json              
+├── next.config.mjs           
+└── server.js                  # การใช้งานเซิร์ฟเวอร์แบบกำหนดเอง
+```
 
-## Learn More
+### Design Decisions
+การออกแบบ UI/UX ของเรารองรับขนาดหน้าจอที่แตกต่างกัน:
 
-To learn more about Next.js, take a look at the following resources:
+#### มือถือ (< 768px)
+- เลย์เอาต์แบบคอลัมน์เดียวสำหรับแบบฟอร์ม
+- มุมมองเจ้าหน้าที่แบบง่ายพร้อมส่วนที่สามารถยุบได้
+- อินพุตแบบฟอร์มที่เป็นมิตรกับการสัมผัส
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### แท็บเล็ต (768px - 1024px)
+- เลย์เอาต์แบบสองคอลัมน์ตามความเหมาะสม
+- การนำทางแบบฟอร์มที่ได้รับการปรับปรุง
+- แดชบอร์ดเจ้าหน้าที่ที่ปรับให้เหมาะสมพร้อมตารางที่สามารถเรียงลำดับได้
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#### เดสก์ท็อป (> 1024px)
+- เลย์เอาต์แบบหลายคอลัมน์
+- แดชบอร์ดเจ้าหน้าที่แบบครอบคลุมพร้อมตัวเลือกการกรอง
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### โทนสี
+เนื่องจากเป็นเว็บไซต์ของโรงพยาบาล เราจึงเลือกใช้โทนสีที่นุ่มนวล เป็นมิตร และให้ความรู้สึกสงบ:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# Patient_Form_Dashboard-
+- **สีหลัก**: โทนสีน้ำเงินอ่อนถึงน้ำเงินกลาง สื่อถึงความเป็นมืออาชีพและความน่าเชื่อถือ แต่ยังคงความนุ่มนวลไม่แข็งกร้าวเกินไป
+- **สีสำหรับฟอร์มที่เสร็จสมบูรณ์**: โทนสีเขียวอ่อน สื่อถึงความสำเร็จและความสมบูรณ์แต่ยังคงความนุ่มนวล
+- **สีสถานะ**: ใช้สีอ่อนๆ (น้ำเงินอ่อน, เหลืองอ่อน, เขียวอ่อน) เพื่อแสดงสถานะของฟอร์มโดยไม่รบกวนสายตามากเกินไป
+- **พื้นหลัง**: สีขาวและเทาอ่อนเพื่อความสบายตาเมื่อใช้งานเป็นเวลานาน
+- **การไล่เฉดสี (Gradients)**: ใช้การไล่เฉดสีที่นุ่มนวลเพื่อสร้างมิติแต่ไม่รบกวนสายตา
+
+การเลือกใช้โทนสีเหล่านี้เป็นไปตามหลักจิตวิทยาสีในสภาพแวดล้อมทางการแพทย์ เพื่อสร้างบรรยากาศที่สงบ น่าเชื่อถือ และลดความวิตกกังวลของผู้ป่วย
+
+### Component Architecture
+แอปพลิเคชันของเราสร้างขึ้นโดยใช้สถาปัตยกรรมแบบคอมโพเนนต์:
+
+1. **คอมโพเนนต์หลัก**
+   - `FormField`: คอมโพเนนต์ฟิลด์แบบฟอร์มที่นำกลับมาใช้ใหม่ได้ซึ่งจัดการกับประเภทอินพุตที่แตกต่างกัน
+   - `PatientForm`: คอมโพเนนต์แบบฟอร์มผู้ป่วยหลักพร้อมตรรกะการตรวจสอบความถูกต้อง
+   - `StaffView`: แดชบอร์ดเจ้าหน้าที่แบบเรียลไทม์สำหรับติดตามการส่งแบบฟอร์ม
+
+2. **คอมโพเนนต์หน้า**
+   - หน้าแรก: จุดเริ่มต้นพร้อมการนำทางไปยังส่วนของผู้ป่วยและเจ้าหน้าที่
+   - หน้าผู้ป่วย: อินเทอร์เฟซการส่งแบบฟอร์มสำหรับผู้ป่วย
+   - หน้าเจ้าหน้าที่: แดชบอร์ดการติดตามสำหรับเจ้าหน้าที่ทางการแพทย์
+
+3. **เลเยอร์ API**
+   - Socket.js: จัดการการสื่อสารแบบเรียลไทม์ระหว่างผู้ป่วยและเจ้าหน้าที่
+
+คอมโพเนนต์สื่อสารผ่านการกำหนดเส้นทางของ Next.js, Context API และการเชื่อมต่อ socket สำหรับการอัปเดตแบบเรียลไทม์
+
+### Real-Time Synchronization Flow
+แอปพลิเคชันของเราจัดการกับการอัปเดตแบบเรียลไทม์ผ่านโฟลว์ต่อไปนี้:
+
+1. **การส่งแบบฟอร์มของผู้ป่วย**
+   - ผู้ป่วยกรอกฟิลด์แบบฟอร์ม
+   - ข้อมูลแบบฟอร์มได้รับการตรวจสอบความถูกต้องฝั่งไคลเอนต์
+   - เมื่อส่ง ข้อมูลจะถูกส่งไปยังเซิร์ฟเวอร์
+
+2. **การประมวลผลของเซิร์ฟเวอร์**
+   - เซิร์ฟเวอร์รับข้อมูลแบบฟอร์มผ่านจุดสิ้นสุด API
+   - ข้อมูลได้รับการตรวจสอบความถูกต้องฝั่งเซิร์ฟเวอร์
+   - การส่งที่ถูกต้องได้รับการจัดเก็บและเผยแพร่ผ่าน socket.io
+
+3. **การแจ้งเตือนเจ้าหน้าที่**
+   - มุมมองเจ้าหน้าที่รักษาการเชื่อมต่อ socket ที่ใช้งานอยู่
+   - การส่งใหม่ทำให้เกิดการอัปเดตแบบเรียลไทม์
+   - อินเทอร์เฟซเจ้าหน้าที่อัปเดตโดยไม่ต้องรีเฟรชหน้า
+
+4. **ฟีเจอร์การซิงโครไนซ์**
+   - ความคืบหน้าของการกรอกแบบฟอร์มถูกซิงโครไนซ์แบบเรียลไทม์
+   - เจ้าหน้าที่สามารถเห็นว่าฟิลด์ใดกำลังถูกกรอกขณะที่ผู้ป่วยพิมพ์
+   - การอัปเดตสถานะ (ส่งแล้ว, กำลังดำเนินการ, ตรวจสอบแล้ว) ถูกซิงโครไนซ์
+
+## Bonus Features
+- ฟังก์ชันบันทึกแบบฟอร์มที่ผู้ป่วยกรอก
+- การติดตามประวัติผู้ป่วย
+
+
+## Technologies Used
+- Frontend: Next.js, React
+- Backend: Node.js พร้อมเซิร์ฟเวอร์ที่กำหนดเอง
+- การสื่อสารแบบเรียลไทม์: Socket.io
+- Styling: Tailwind CSS
+- Deployment: Vercel
+
